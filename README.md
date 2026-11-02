@@ -12,3 +12,4 @@ scripts: contains scripts, to be run in following order: ... (to be filled in wh
 outputs: contains output files such as map images or geopackages.
 
 ## Sprint logs
+#Sprint0 - 02/11/2026: GitHub organisation and repository created. Each memeber created 1 folder. Roles for the project decided. Next: download the data, clean data and create DB. 
