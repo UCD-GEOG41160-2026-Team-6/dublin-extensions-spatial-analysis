@@ -1,0 +1,5 @@
+/data/
+/Outputs/
+
+# Jupyter temporary files
+**/.ipynb_checkpoints/
