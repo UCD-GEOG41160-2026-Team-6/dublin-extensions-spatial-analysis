@@ -1,5 +1,9 @@
-/data/
-/Outputs/
+data/*
+Outputs/*
+
+# Keep the folders in GitHub
+!data/.gitkeep
+!outputs/.gitkeep
 
 # Jupyter temporary files
 **/.ipynb_checkpoints/
