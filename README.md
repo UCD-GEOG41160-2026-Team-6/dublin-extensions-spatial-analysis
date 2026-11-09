@@ -11,6 +11,17 @@ scripts: contains scripts, to be run in following order: ... (to be filled in wh
 
 outputs: contains output files such as map images or geopackages.
 
+## Workflow
+Q1 short description
+
+Q2 Global Spatial Autocorrelation
+Part 1: Examined the distribution of extension density and applied a log transformation. 
+    Part 2: Created spatial weights using Queen contiguity. 
+        Part 3: Computed Global Morans I using a fixed random seed and 999 permutations, reporting the I statistic and p-value for both raw and transformed density. 
+            Part 4: Interpreted the results and explained the effect of the transformation.
+
+Q3 short description
+
 ## Sprint logs
 #Sprint0 - 02/11/2026: GitHub organisation and repository created. Each memeber created 1 folder. Roles for the project decided. Next: download the data, clean data and create DB. 
 
