@@ -49,7 +49,7 @@ eds.plot(color=eds["lisa_class"].map(colours), edgecolor="grey", linewidth=0.3,
          ax=ax)
 ax.legend(handles=[Patch(color=c, label=f"{k}({(eds['lisa_class'] == k).sum()})") for k, c in colours.items()], loc="lower right", fontsize=8)
 
-ax.set_title("LISA of Expansion Applications, Dubllin")
+ax.set_title("LISA of Extension Applications, Dubllin")
 ax.set_axis_off()
 plt.savefig(OUTPUT / "LISA_ExtensionDensity_DublinED.png", dpi=180, bbox_inches="tight")
 plt.show()
