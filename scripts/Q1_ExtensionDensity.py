@@ -1,6 +1,5 @@
 """ GEOG41160 Assignment 2, Question 1: Extension density by ED
 Team: 6
-
 """
 
 ### Importing libraries
@@ -13,24 +12,34 @@ import matplotlib.pyplot as plt
 
 
 ### Setting Paths
-# ROOT = Path(__file__).resolve().parents[1]
-ROOT = Path.cwd().parent
+ROOT = Path(__file__).resolve().parents[1]
+# ROOT = Path.cwd().parent
 DATA = ROOT / "data"
 OUTPUT = ROOT / "Outputs"
+OUTPUT.mkdir(parents=True, exist_ok=True)
 
 PLANNING = DATA / "planning" / "planning_applications_national.gpkg"
 EDS = DATA/ "boundaries" / "eds_national.gpkg"
 
 DATABASE = OUTPUT / "extensions.duckdb"  #only a variable name so far
 
-# # Checking paths
-# print("Repository:", ROOT)
-# print("Planning data exists:", PLANNING.exists())
-# print("ED boundaries exist:", EDS.exists())
-# print("Output folder:", OUTPUTS)
+# Checking paths
+print("Working folder:", Path.cwd())
+print("Repository:", ROOT)
+print("Planning data exists:", PLANNING.exists())
+print("ED boundaries exist:", EDS.exists())
+print("Output folder:", OUTPUTS)
 
 
-                    ###PART1###
+                    ### PART 1 ###
+""" Creates a DuckDB spatial database file, outputs/extensions.duckdb.
+    Imports Planning applications (as 'planning_national') and Electoral Divisions (as 'eds_national') into the DuckDB.
+    Filters and creates a new table 'eds' for the EDs of Dublin City. 
+    Filters and creates a new table 'planning' for the Planning Applications received by Dublin City Council in the complete calendar years 2019–2025,
+     where DevelopmentDescription contains the word “extension”, regardless of capitalisation.
+    Length of 'eds ': 162 rows.
+    Length of 'planning': 9914 rows.
+"""
 ### Create the database
 con = duckdb.connect(DATABASE)
 
@@ -73,7 +82,13 @@ print("Dublin City Council extension applications:")
 print(con.sql("SELECT COUNT(*) FROM planning"))
 
 
-                    ###PART2###
+                    ### PART 2 ###
+""" 'eds': CRS = EPSG:2157, number of features = 162,  geometry type = MULTIPOLYGON. 
+    'planning': CRS = EPSG:EPSG:3857, number of features = 9914,  geometry type = POINT. 
+    Reprojects the 'planning' to the 'eds' coordinate system (EPSG:2157 - ITM) in SQL.
+    The analysis needs ITM, as it is specifically designed for Ireland and uses metres as its units,
+     making it suitable for spatial analysis and accurate area and distance calculations.
+"""
 ### Print CRS, number of features and geometry type
 # EDS
 print("---EDS---")
@@ -102,7 +117,14 @@ con.sql("""
 """)
 
 
-                    ###PART3###
+                    ### PART 3 ###
+""" Spatially joins 'planning' to the 'eds' in SQL and counts the applications in each ED. 
+    The highest number of Applications is in CLONTARF EAST B with 304 extension applications.
+    14 extension applications fall outside every ED. 
+    This may be because 'ST_Within' returns True only when strictly inside the boundary, and the points can:
+     - be located exactly on the ED boundary,
+     - fall outside all the ED boundaries after reprojection.
+"""
 ### Spatial Join of Applications and EDs
 con.sql("""
     CREATE OR REPLACE TABLE ed_counts AS
@@ -127,7 +149,11 @@ print(con.sql("""
 """))
 
 
-                    ###PART4###
+                    ### PART 4 ###
+""" Calculates the density of applications in each ED (applications per km2).
+    ROYAL EXCHANGE B has 171.6 applications per km2.
+    Saves the result as DublinED_ExtensionDensity.gpkg.
+"""
 ### Density of Applications in each ED
 df = con.sql("""
     SELECT ED_ENGLISH, applications, ST_AsWKB(SHAPE) AS wkb
@@ -141,7 +167,11 @@ eds_map.to_file(OUTPUT / "DublinED_ExtensionDensity.gpkg")
 print(gpd.read_file(OUTPUT / "DublinED_ExtensionDensity.gpkg").head())
 
 
-                    ###PART5###
+                    ### PART 5 ###
+""" Maps the density of Extension Applications in Dublin City.
+    1 to 408 applications per km2, highest in Dublin South.
+    Saves the map as ExtensionDensity_DublinED.png.
+"""
 ### Mapping the Density
 ax = eds_map.plot(column="per_km2", scheme="Quantiles", k=5, cmap="YlOrRd",
                  edgecolor="grey", linewidth=0.3, figsize=(7, 6), legend=True,
