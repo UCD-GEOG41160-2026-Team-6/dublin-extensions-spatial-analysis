@@ -24,7 +24,10 @@ INPUT = ROOT / "Outputs" / "DublinED_ExtensionDensity.gpkg"
 
 
 gdf = gpd.read_file(INPUT)
-
+print("Working folder:", Path.cwd())
+print("Repository:", ROOT)
+print("Dublin Extension Application Ddensity exist:", gdf.exists())
+print("Output folder:", OUTPUT)
 print(gdf.head())
 
 
