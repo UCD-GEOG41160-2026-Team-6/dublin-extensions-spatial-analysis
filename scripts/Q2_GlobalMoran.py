@@ -52,6 +52,7 @@ axes[1].set_title("log(1 + Applications per km2)")
 axes[1].set_xlabel("Log(1 + extension applications per km²)")
 axes[1].set_ylabel("Number of EDs")
 plt.tight_layout()
+plt.savefig(ROOT / "Outputs" / "Q2_Histogram.png", dpi=180, bbox_inches="tight")
 plt.show()
 
                 ###PART 2: Creating spatial weights ###
