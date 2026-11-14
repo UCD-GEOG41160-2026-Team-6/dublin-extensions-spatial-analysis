@@ -5,11 +5,26 @@ This workflow analyses where people in Dublin City extend their buildings based 
 performs global spatial autocorrelation, and analyses local clusters and hotspots.
 
 ## Folders
-data: contains the downloaded data for use in project; downloaded 05/11/2026 from Department of Housing, Local Government and Heritage and Tailte Éireann
+### data: 
+Contains the downloaded data for use in project; downloaded 05/11/2026 from Department of Housing, Local Government and Heritage and Tailte Éireann.
 
-scripts: contains scripts, to be run in following order: ... (to be filled in when finished)
 
-outputs: contains output files such as map images or geopackages.
+
+### scripts: 
+Contains scripts, to be run in following order: Q1_ExtensionDensity.py, Q2_GlobalMoran.py, Q3_LISAandGi.py
+
+### outputs: 
+Contains output files such as map images or geopackages.
+#### From Q1:
+DublinED_ExtensionDensity.gpkg: Density of extension applications in Dublin city by ED, saved as a geopackage.
+ExtensionDensity_DublinED.png: Density of extension applications in Dublin city by ED, represented in a map which is saved as a png.
+
+#### From Q2: 
+Q2_Histogram.png: Histogram of extension application density, saved as a png.
+
+#### From Q3: 
+LISA_ExtensionDensity_DublinED.png: Local Moran's I of extension applications by ED in Dublin, saved as a png.
+GiStar_ExtensionDensity_DublinED.png: Getis-Ord Gi* of extension applications by ED in Dublin, saved as a png.
 
 ## Workflow
 ### Q1 short description
