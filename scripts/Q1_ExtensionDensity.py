@@ -28,7 +28,7 @@ print("Working folder:", Path.cwd())
 print("Repository:", ROOT)
 print("Planning data exists:", PLANNING.exists())
 print("ED boundaries exist:", EDS.exists())
-print("Output folder:", OUTPUTS)
+print("Output folder:", OUTPUT)
 
 
                     ### PART 1 ###
