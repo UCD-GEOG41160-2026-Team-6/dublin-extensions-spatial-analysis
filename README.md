@@ -45,6 +45,7 @@ Next: download the data, clean data and create DB.
 07/11/2026 (end date): Data downloaded and placed in the data folder. Created Script 'Q1_ExtensionDensity' and answered question 1 of the assignment.
 
 ### Sprint 2
+09/11/2026 (end date): Downloaded data folder and script of Q1_ExtensionDensity. Then created Script 'Q2_GlobalMoran' and answered question 3 of the assignment. Committed in GitHub. 
 
 ### Sprint 3 
 12/11/2026:  Created Script 'Q3_LISAandGi' and answered question 3 of assignment.  Checked scripts to ensure cohesion of formatting.
