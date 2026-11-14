@@ -64,3 +64,11 @@ Next: download the data, clean data and create DB.
 
 ### Sprint 3 
 12/11/2026:  Created Script 'Q3_LISAandGi' and answered question 3 of assignment.  Checked scripts to ensure cohesion of formatting.
+
+### Sprint 4
+14/11/2026: 
+•	Revised code formatting for consistency and checked for errors.
+•	Ran the code for the final time.
+•	Updated the README file.
+
+
