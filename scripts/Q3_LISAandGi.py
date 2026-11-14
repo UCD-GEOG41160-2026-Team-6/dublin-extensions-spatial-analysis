@@ -1,4 +1,6 @@
-"""Question 3: LISA and Getis-Ord Gi*"""
+""" GEOG41160 Assignment 2, Question 3: LISA and Gi*
+Team: 6
+"""
 #Imports
 import numpy as np
 import pandas as pd
@@ -14,10 +16,19 @@ from scipy.stats import norm
 #Path Assignments
 ROOT = Path.cwd().parent
 OUTPUT = ROOT / "Outputs"
+OUTPUT.mkdir(parents=True, exist_ok=True)
 INPUT = ROOT / "Outputs" / "DublinED_ExtensionDensity.gpkg"
 
 eds = gpd.read_file(INPUT)
 eds.head(10)
+
+#Checking Paths
+print("Working folder:", Path.cwd())
+print("Repository:", ROOT)
+print("Planning data exists:", PLANNING.exists())
+print("ED boundaries exist:", EDS.exists())
+print("Output folder:", OUTPUT)
+
 
 #Assign initial variables
 eds["log_density"] = np.log1p(eds["per_km2"]) 
@@ -26,7 +37,8 @@ w = libpysal.weights.Queen.from_dataframe(eds, use_index=True)
 w.transform = "r"
 np.random.seed(42)
 
-#Step 1: Calculate LISA
+###Part 1###
+#Calculate LISA
 """1: LISA finds 112 insignificant EDs, 23 low-low clusters, 20 high-high clusters, 5 low-high outliers, and 2 high-low outliers."""
 lisa = esda.Moran_Local(x, w, permutations=9999, seed=42)
 
@@ -35,12 +47,14 @@ classes = pd.Series(lisa.q).map(quadrants)
 eds["lisa_class"] = np.where(lisa.p_sim <= 0.05, classes, "Not significant")
 print(eds["lisa_class"].value_counts())
 
+###Part 2###
 #Apply False Discovery Rate correction
 """2:  After the False Discovery Rate threshold, 2 EDs remain significant."""
 threshold = esda.fdr(lisa.p_sim, 0.05)
 print("FDR Threshold:", round(threshold, 5), "| smallest p:", lisa.p_sim.min())
 print("Significant after FDR:", (lisa.p_sim <= threshold).sum())
 
+### Part 3###
 #Map LISA classes
 """3: LISA classes saved as 'LISA_ExtensionDensity_DublinED.png'"""
 colours = {"High-High": "#d7191c", "Low-High": "#abd9e9", "Low-Low": "#2c7bb6", "High-Low": "#fdae61", "Not significant": "#eeeeee"}
@@ -54,6 +68,7 @@ ax.set_axis_off()
 plt.savefig(OUTPUT / "LISA_ExtensionDensity_DublinED.png", dpi=180, bbox_inches="tight")
 plt.show()
 
+###Part 4###
 #Getis-Ord Gi* setup
 w_bin = libpysal.weights.Queen.from_dataframe(eds, use_index=True)
 gi = G_Local(x, w_bin, transform="B", star=1.0, permutations=999, seed=42) 
@@ -69,6 +84,7 @@ threshold = esda.fdr(eds["gi_p"].values, 0.05)
 print(eds.loc[eds["gi_p"] <= threshold, ["ED_ENGLISH", "gi_z"]])
 print("Significant after FDR:", (lisa.p_sim <= threshold).sum())
 
+###Part 5###
 #Define the function to fix colorbar heights as used in class
 def fix_colorbar_height(fig, ax):
     cbar = fig.axes[-1] # the color bar: last axes added
@@ -89,6 +105,7 @@ fix_colorbar_height(fig, ax)
 plt.savefig(OUTPUT / "GiStar_ExtensionDensity_DublinED.png", dpi=180, bbox_inches="tight")
 plt.show()
 
+###Part 6###
 #Compare Gi and LISA
 """6:  When looked at in quadrants, Gi* finds 19 Hotspots compared to LISA's 20, and 15 coldspots compared to LISA's 23.
 Observation of the maps shows several EDs in the Gi* which lean towards being coldspots, such as in Dublin 11, but have a Z-score too close to 0
