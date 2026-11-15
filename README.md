@@ -28,7 +28,18 @@ LISA_ExtensionDensity_DublinED.png: Local Moran's I of extension applications by
 GiStar_ExtensionDensity_DublinED.png: Getis-Ord Gi* of extension applications by ED in Dublin, saved as a png.
 
 ## Workflow
-### Q1 short description
+### Q1 Extension density by ED:
+Part 1: Created a DuckDB spatial database file. Using SQL, imported the two tables from the national files into the database, and created new tables with filtering condition:
+    • eds: the EDs of Dublin City (COUNTY_ENGLISH = 'DUBLIN CITY');
+    • planning: the planning applications received by Dublin City Council in the complete calendar years 2019–2025, where DevelopmentDescription contains the word “extension”, regardless of capitalisation.
+    
+Part 2: Reprojected the applications to the EDs’ coordinate system (EPSG:2157) in SQL.
+
+Part 3: Spatially joined the applications to the EDs in SQL, and count the applications in each ED. Reported how many applications fall outside every ED.
+
+Part 4: Calculated the density of applications in each ED (applications per km2), and saved the result as GPKG.
+
+Part 5: Mapped the density, and saved the map as .png.
 
 ### Q2 Global Spatial Autocorrelation:
 Part 1: Examined the distribution of extension density and applied a log transformation. 
@@ -58,7 +69,7 @@ Part 6: Compared results of LISA to Getis-Ord Gi*.
 Next: download the data, clean data and create DB. 
 
 ### Sprint 1 
-07/11/2026 (end date): Data downloaded and placed in the data folder. Created Script 'Q1_ExtensionDensity' and answered question 1 of the assignment.
+07/11/2026 (end date): Data downloaded and placed in the 'data' folder. Created Script 'Q1_ExtensionDensity' and answered question 1 of the assignment.
 
 ### Sprint 2
 09/11/2026 (end date): Downloaded data folder and script of Q1_ExtensionDensity. Then created Script 'Q2_GlobalMoran' and answered question 3 of the assignment. Committed in GitHub. 
@@ -67,7 +78,7 @@ Next: download the data, clean data and create DB.
 12/11/2026:  Created Script 'Q3_LISAandGi' and answered question 3 of assignment.  Checked scripts to ensure cohesion of formatting.
 
 ### Sprint 4
-14/11/2026: 
+15/11/2026: 
 •	Revised code formatting for consistency and checked for errors.
 •	Ran the code for the final time.
 •	Updated the README file.
