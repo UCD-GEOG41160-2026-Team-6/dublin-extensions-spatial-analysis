@@ -25,8 +25,7 @@ eds.head(10)
 #Checking Paths
 print("Working folder:", Path.cwd())
 print("Repository:", ROOT)
-print("Planning data exists:", PLANNING.exists())
-print("ED boundaries exist:", EDS.exists())
+print("Dublin Extension Application Density exists:", eds.exists)
 print("Output folder:", OUTPUT)
 
 
