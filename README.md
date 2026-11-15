@@ -16,6 +16,7 @@ Contains scripts, to be run in following order: Q1_ExtensionDensity.py, Q2_Globa
 ### outputs: 
 Contains output files such as map images or geopackages.
 #### From Q1:
+extensions.duckdb: Database with all applications and ED boundaries.
 DublinED_ExtensionDensity.gpkg: Density of extension applications in Dublin city by ED, saved as a geopackage.
 ExtensionDensity_DublinED.png: Density of extension applications in Dublin city by ED, represented in a map which is saved as a png.
 
