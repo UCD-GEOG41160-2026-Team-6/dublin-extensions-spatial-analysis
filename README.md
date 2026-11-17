@@ -7,8 +7,8 @@ performs global spatial autocorrelation, and analyses local clusters and hotspot
 ## Folders
 ### data: 
 Contains the downloaded data for use in project; downloaded 05/11/2026 from Department of Housing, Local Government and Heritage and Tailte Éireann.
-
-
+ - data/planning/planning_applications_national.gpkg - the Department of Housing, Local Government and Heritage’s Planning Application Points, the national database of planning applications from all 31 councils (data.gov.ie, CC BY 4.0), at https://data-housinggovie.opendata.arcgis.com/datasets/housinggovie::planning-application-points
+ - data/boundaries/eds_national.gpkg - Tailte Éireann’s CSO Electoral Divisions – National Statistical Boundaries – 2022 – Ungeneralised, all 3,420 EDs (data.gov.ie, CC BY 4.0), at https://data-osi.opendata.arcgis.com/datasets/osi::cso-electoral-divisions-national-statistical-boundaries-2022-ungeneralised
 
 ### scripts: 
 Contains scripts, to be run in following order: Q1_ExtensionDensity.py, Q2_GlobalMoran.py, Q3_LISAandGi.py
