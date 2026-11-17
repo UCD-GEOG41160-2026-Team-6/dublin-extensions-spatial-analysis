@@ -30,8 +30,8 @@ GiStar_ExtensionDensity_DublinED.png: Getis-Ord Gi* of extension applications by
 ## Workflow
 ### Q1 Extension density by ED:
 Part 1: Created a DuckDB spatial database file. Using SQL, imported the two tables from the national files into the database, and created new tables with filtering condition:
-    • eds: the EDs of Dublin City (COUNTY_ENGLISH = 'DUBLIN CITY');
-    • planning: the planning applications received by Dublin City Council in the complete calendar years 2019–2025, where DevelopmentDescription contains the word “extension”, regardless of capitalisation.
+     • eds: the EDs of Dublin City (COUNTY_ENGLISH = 'DUBLIN CITY');
+     • planning: the planning applications received by Dublin City Council in the complete calendar years 2019–2025, where DevelopmentDescription contains the word “extension”, regardless of capitalisation.
     
 Part 2: Reprojected the applications to the EDs’ coordinate system (EPSG:2157) in SQL.
 
